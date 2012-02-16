@@ -1,0 +1,357 @@
+* Walker Site Deployment
+** create walker database user
+*** su postgres && createuser -P -s -e walkerart
+** use virtualenv & pip with requirements.txt
+** apt-get install libpq-dev
+** apt-get install cython
+*** sudo easy_install pip
+*** sudo pip install virtualenv
+*** virtualenv --no-site-packages --python=python2.6 fullenv 
+*** source fullenv/bin/activate
+*** pip install yolk
+*** pip install -r requirements.txt 
+*** yolk -l 
+*** ln -sd fullenv/lib/pyton2.6/site-packages/opencv opencv
+*** apt-get install python-opencv
+*** scp cthompson@colbert.walkerart.org:best/local_settings.py local_settings.py
+*** ln -sd /usr/lib/pyshared/python2.6/opencv fullenv/lib/python2.6/site-packages/opencv
+*** ln -sd fullenv/lib/pyton2.6/site-packages/sunburnt sunburnt
+*** ./manage.py syncdb
+*** pip install south
+*** add south to installed apps
+*** ./manage.py syncdb
+** if initial migration doesn't exist
+*** ./manage.py convert_to_south walker
+** else 
+** implement south, migrations
+** how to push to svn server from local machines?
+** deploy with fabric script
+* cspace
+** TODO collections management / cspace notes/docs with Joe King     :cspace:
+   SCHEDULED: <2012-02-17 Fri 10:00>
+
+* cspace site-plan  
+  :PROPERTIES:
+  :date-recorded: <2012-02-16 Thu>
+  :END:
+** catalog
+*** fields
+**** identification info
+identification number
+brief description
+number of objects
+number + number type| *
+distinguishing features
+responsible department|
+collection|
+record status|
+comments *
+title section *
+object name *
+
+**** description info
+copy number
+edition number
+object status| *
+age + age qualifier| + unit|
+sex|
+style *
+phase| *
+color *
+form| *
+- material
+  m. component + m. component note + m. name + m. source *
+physical description #
+- object component
+  name| + information *
+- technical attribute
+  attribute| + measurement| + unit| * 
+- Dimensions *
+  part| + summary + 
+  - Measurements
+    dimension| + value + method| + measured by + unit| + value qualifier + date *
+***** content
+description
+language| *
+people *
+activity *
+person *
+concept *
+place *
+date
+script| *
+position| *
+organization *
+- object
+  object + object type| *
+- event name
+  event name + event name type *
+- other
+  other + other type *
+note
+***** textual inscription
+inscription content
+inscriber
+position|
+language|
+script|
+date
+type|
+method
+interpretation
+translation
+transliteration
+***** not-textual inscription
+inscription content
+inscriber
+position|
+date
+type|
+method
+interpretation
+**** production info
+production date *
+- people
+  people + role *
+- technique
+  technique + technique type *
+- person
+  person + role *
+- place
+  place + role *
+- organization
+  organization + role *
+production reason
+production note
+**** history and association info
+***** associations
+- activity
+      activity + type + note *
+- object
+  object + type + note *
+- concept
+  concept + type + note *
+- cultural affinity
+  affinity + type + note *
+- organization
+  organization + type + note *
+- people
+  people + type + note *
+- person
+  person + type + note *
+- place
+  place + type + note 
+event name + event name type
+event organization *
+event people *
+event person *
+event place *
+event note *
+- date
+  date + type + note *
+***** history
+object history note
+usage + usage note *
+owner *
+ownership access|
+ownership category|
+ownership date|
+ownership place
+method + note + price-currenty + price-value 
+
+
+
+
+
+**** owner's contribution info
+personal experience
+personal response
+reference *
+contribution note
+
+
+**** viewer's contribution info
+role
+personal experience
+personal response
+reference *
+contribution note
+
+**** reference info
+reference + note *
+**** collection info
+date
+place
+method| *
+source *
+collector *
+event name *
+note
+number
+
+** acquisition
+*** fields
+**** acquisition info
+reference number
+accession date
+authorizer + authorizor date
+date
+method|
+source *
+owner
+transfer of title number
+purchase  value    + currency| + value
+offer              + currency| + value
+purchase offer     + currency| + value
+purchase           + currency| + value
+original purchase  + currency| + value
+reason
+note
+provisos
+- funding
+  currency| + value + source + source provisos *
+credit line
+**** collection info
+field collection event name *
+
+** loan in
+*** fields
+**** loans in info
+loan in number
+purpose|
+- status
+  status + note + date *
+- lender
+  lender + lender's contact + lender's authorizer + authorization date *
+- borrower
+  contact + authorizer + authorization date
+conditions.
+note.
+date
+return date
+renewal application date
+
+** loan out
+*** fields
+**** loans out info
+loan out number
+purpose|
+- lender
+  authorizer + contact + authorization date
+- borrower
+  borrower + contact + authorizer + authorization date
+conditions.
+note.
+- status
+  status + note + date *
+date
+return date
+renewal application date
+
+** location and movement
+*** fields
+**** location and movement
+current location + fitness + note
+location date
+normal location
+**** movement control info
+reference number
+contact
+planned removal date
+removal date
+method|
+reason for move|
+note.
+** object exit
+*** fields
+**** exit info
+number
+date
+current owner
+method|
+depositor
+reason|
+note.
+packing note.
+
+** intake
+*** fields
+**** entry info
+number
+return date
+entry date
+current owner
+reason|
+depositor + depositor requirements
+method| *
+note.
+packing note.
+**** collection info
+field collection date
+place
+method| *
+source *
+note.
+collector *
+event name *
+collection number
+**** valuation
+valuer
+reference number
+**** insurance
+insurer
+reference number
+policy number
+note.
+renewal date
+**** location
+- current location
+  current location + fitness| + note *
+location date
+normal location
+**** condition
+check method|
+check date
+check reason|
+check reference number
+check assessor
+check note.
+** group
+*** fields
+**** group info
+title
+responsible department|
+owner
+scope note.
+
+** media handling
+*** fields
+**** file info
+upload media^
+link to external media->
+**** media handling info
+title
+identification number
+contributor
+types| *
+creator
+coverage
+languages| *
+dates *
+publisher 
+source
+relations *
+subjects *
+copyright statement
+rights holder
+description.
+- dimensions *
+  part|
+  summary 
+  - measurements
+    diminsion| + value + method| + measured by + unit + qualifier + date *
+
+
+
+
+
