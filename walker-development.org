@@ -29,10 +29,14 @@
 * cspace
 ** TODO collections management / cspace notes/docs with Joe King     :cspace:
    SCHEDULED: <2012-02-17 Fri 10:00>
+   :PROPERTIES:
+   :ID:       34163da4-1e79-4af3-b01c-3b18c47ef0ce
+   :END:
 
 * cspace site-plan  
   :PROPERTIES:
   :date-recorded: <2012-02-16 Thu>
+  :ID:       0856db72-1e70-4287-b7b5-e7e7ae8a73d2
   :END:
 ** catalog
 *** fields
